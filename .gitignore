@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+env/
+*.egg-info/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Large/generated experiment artifacts
+data/
+outputs/
+results/
+checkpoints/
+runs/
+wandb/
+*.pth
+*.pt
+*.ckpt
+*.nii
+*.nii.gz
+*.npy
+*.npz
+
+# Logs
+*.log

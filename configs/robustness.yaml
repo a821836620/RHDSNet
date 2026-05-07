@@ -1,0 +1,15 @@
+base_config: configs/rhdsnet_ispy2.yaml
+experiment:
+  output_dir: outputs/robustness_recursive_noise
+  noise_sigma: 0.02
+  settings:
+    - name: no perturbation
+      phase: null
+    - name: noise at V1
+      phase: 1
+    - name: noise at V2
+      phase: 2
+    - name: noise at V3
+      phase: 3
+    - name: noise at V4
+      phase: 4

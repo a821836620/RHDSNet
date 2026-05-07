@@ -1,0 +1,71 @@
+project: RHDSNet
+dataset:
+  name: DUKE
+  root: data/synthetic_duke
+  manifest: null
+  split_file: null
+  num_post_phases: 4
+  train_ratio: 0.7
+  val_ratio: 0.1
+  test_ratio: 0.2
+  synthetic_if_missing: true
+  spacing: [1.0, 1.0, 1.0]
+preprocess:
+  clip_percentile: 0.1
+  normalize: zscore
+  crop_size: [96, 96, 48]
+  crop_size_order: hwd
+  random_flip: true
+  random_intensity_scale: true
+training:
+  output_dir: outputs/rhdsnet_duke
+  seeds: [2024, 2025, 2026, 2027, 2028]
+  device: cuda
+  batch_size: 1
+  num_workers: 2
+  max_epochs: 1000
+  early_stopping_patience: 50
+  diffusion_pretrain_epochs: 200
+  optimizer: Adam
+  lr: 0.0001
+  weight_decay: 0.0
+  amp: true
+  distributed: false
+  data_parallel: false
+  save_every: 50
+loss:
+  gamma: 0.5
+  eta: 1.0
+model:
+  in_channels: 1
+  num_classes: 1
+  base_channels: 24
+  levels: 4
+  num_post_phases: 4
+  rhdd:
+    diffusion_steps: 1000
+    beta_start: 0.000001
+    beta_end: 0.01
+    ddim_steps_train: 8
+    ddim_steps_test: 25
+    dynamic_blending: true
+    blending_delta: 1.0
+    total_blending_epochs: 1000
+    local_decoupling: true
+    kappa: 12.0
+    tau: 0.35
+    lambda_bg: 0.2
+  mtc:
+    enabled: true
+    inject_layers: [1, 2, 3, 4]
+    attn_channels: 16
+    kv_pool_size: [2, 4, 4]
+inference:
+  sliding_window: true
+  roi_size: [96, 96, 48]
+  roi_size_order: hwd
+  overlap: 0.5
+  threshold: 0.5
+metrics:
+  save_predictions: true
+  save_generated: true

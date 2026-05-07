@@ -1,0 +1,16 @@
+base_config: configs/rhdsnet_ispy2.yaml
+experiment:
+  output_dir: outputs/ablation_db_ld
+  settings:
+    - name: DDPM baseline
+      dynamic_blending: false
+      local_decoupling: false
+    - name: +DB
+      dynamic_blending: true
+      local_decoupling: false
+    - name: +LD
+      dynamic_blending: false
+      local_decoupling: true
+    - name: RHDSNet
+      dynamic_blending: true
+      local_decoupling: true

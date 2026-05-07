@@ -1,0 +1,8 @@
+torch
+numpy
+PyYAML
+nibabel
+scipy
+scikit-image
+matplotlib
+thop
